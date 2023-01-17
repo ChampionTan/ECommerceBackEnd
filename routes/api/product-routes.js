@@ -30,6 +30,7 @@ router.get('/:id', async(req, res) => {
         model: Tag
       }]
     });
+    res.json(productData);
   }catch {
     console.log(err);
     res.json(err);
@@ -38,24 +39,9 @@ router.get('/:id', async(req, res) => {
   // be sure to include its associated Category and Tag data
 });
 
-// create new product
+//create new product
 router.post('/', async (req, res) => {
-  try {
-    const productData = await Product.create(req.body);
-    res.json(productData);
-  }catch {
-    console.log(err);
-    res.json(err);
-  }
-});
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
+  
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -76,6 +62,15 @@ router.post('/', async (req, res) => {
       console.log(err);
       res.status(400).json(err);
     });
+});
+  /* req.body should look like this...
+    {
+      product_name: "Basketball",
+      price: 200.00,
+      stock: 3,
+      tagIds: [1, 2, 3, 4]
+    }
+  */
 
 
 // update product
