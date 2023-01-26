@@ -19,6 +19,14 @@ ProductTag.init({
       key: 'id',
       unique: false,
     }
+  },
+  tag_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'tag',
+      key: 'id',
+      unique: false,
+    }
   }
     // define columns
   },

@@ -48,8 +48,12 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const categoryData = await Category.update(
-      {where: {id: req.params.id}});
+    const categoryData = await Category.update(req.body, {
+      where: {
+        id: req.params.id,
+      }
+    });
+    if (!categoryData[0])
       res.json(categoryData);
     }catch {
       console.log(err);
